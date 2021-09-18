@@ -23,7 +23,7 @@ const wordPairs = [
 ];
 
 const randomWords = () => {
-    let words = []
+    let words = [];
     let newWordPairs = [...wordPairs];
     const reps = newWordPairs.length;
     for (let i=0; i<reps; i++) {
@@ -51,7 +51,7 @@ export const flipCard = (id) => {
 
 export const resetCards = () => {
     return {
-        type: "board/resetCard"
+        type: "board/resetCards"
     }
 };
 
@@ -75,13 +75,13 @@ export const boardReducer = (state = initialState, action) => {
                 }
             }
             return flipState;
-        case "board/resetBoard":
+        case "board/resetCards":
             return state.map(card => ({...card, visible: false}));
         default:
             return state;
     }
 };
 
-export const selectBoard = state => state.board.map(card => ({ id: card, contents: card.contents}));
+export const selectBoard = state => state.board.map(card => ({id: card.id, contents: card.contents}));
 export const selectVisibleIDs = state => state.board.filter(card => card.visible).map(card => card.id);
 export const selectMatchedIDs = state => state.board.filter(card => card.matched).map(card => card.id);
